@@ -5,3 +5,5 @@ ui/node_modules/
 backend/index.html
 __pycache__/
 backend/poetry.lock
+tmp/
+

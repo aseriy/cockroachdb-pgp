@@ -1,0 +1,16 @@
+{
+  "apiVersion": "core.supabase.io/v1alpha1",
+  "kind": "Function",
+  "metadata": {
+    "name": "cockroachdb-pgp-demo",
+    "namespace": "default"
+  },
+  "spec": {
+    "projectRef": "supabase",
+    "functionName": "cockroachdb-pgp-demo",
+    "verifyJwt": false,
+    "source": {
+      "index.ts": null
+    }
+  }
+}
