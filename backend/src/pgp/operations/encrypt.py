@@ -53,12 +53,19 @@ async def _insert_pgp_messages(client: AsyncClient, id: str, published_on: str, 
     await client.table("pgp_messages").insert({"id": id, "published_on": published_on, "title": title, "content": content}).execute()
 
 
+async def _select_pgp_messages(client: AsyncClient, id: str) -> list[dict]:
+    return (await client.table("pgp_messages").select("id").eq("id", id).limit(1).execute()).data
+
+
 async def _process(client: AsyncClient, lock: asyncio.Lock, passphrase: str, row: dict, source: str) -> bool:
     async with lock:
         try:
             id = row["id"]
             publication = row["publication"]
             logger.info(f"{id}: {source}")
+            if await _select_pgp_messages(client, id):
+                logger.info(f"{id}: exists")
+                return True
             text = await _download(client, id)
             logger.info(f"{id}: downloaded {len(text)} characters")
             text, front_matter_size = _strip_front_matter(text)
