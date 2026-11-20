@@ -1,0 +1,384 @@
+/* Theme tokens, re-implemented from the Mica mockup. The theme is selected by
+   data-mica-theme on <html>; index.html sets it to crl-light. */
+
+:root {
+  color-scheme: light;
+  --mica-canvas: #f7f7f8;
+  --mica-surface: #fff;
+  --mica-surface-subtle: #fafafa;
+  --mica-surface-raised: #fff;
+  --mica-secondary: #f2f2f3;
+  --mica-sidebar: #f5f5f6;
+  --mica-border: #e4e4e7;
+  --mica-border-strong: #d4d4d8;
+  --mica-text: #18181b;
+  --mica-text-muted: #71717a;
+  --mica-text-faint: #a1a1aa;
+  --mica-text-secondary: #52525b;
+  --mica-primary: #18181b;
+  --mica-on-primary: #fafafa;
+  --mica-spectrum-start: #6933ff;
+  --mica-spectrum-end: #00fced;
+  --mica-success: #27845b;
+  --mica-success-bg: #effaf4;
+  --mica-warning: #a36a12;
+  --mica-warning-bg: #fff8e8;
+  --mica-danger: #c43d3d;
+  --mica-danger-bg: #fff1f1;
+  --mica-info: #3568b8;
+  --mica-info-bg: #eff5ff;
+  --mica-font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --mica-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --mica-accent: var(--mica-text);
+  --mica-accent-soft: var(--mica-secondary);
+  --mica-accent-soft-text: var(--mica-text);
+  --mica-link: var(--mica-text);
+  --mica-selection-bg: Highlight;
+  --mica-selection-text: HighlightText;
+  --mica-app-bg: hsl(var(--background));
+  --mica-header-bg: hsl(var(--background));
+  --mica-tabs-bg: hsl(var(--card));
+  --mica-nav-active-bg: hsl(var(--secondary));
+  --mica-nav-active-text: var(--mica-text);
+  --mica-headline-accent: var(--mica-text);
+  --mica-label: var(--mica-text-muted);
+  --mica-send-idle-bg: var(--mica-secondary);
+  --mica-send-idle-text: var(--mica-text-faint);
+  --mica-rail: transparent;
+  --mica-radius-sm: 6px;
+  --mica-radius-md: 8px;
+  --mica-radius-lg: 12px;
+  --mica-radius-agent: 14px;
+  --mica-shadow-sm: 0 1px 2px #0000000a;
+  --mica-shadow-overlay: 0 12px 36px #0000001a;
+  --mica-focus-ring: 0 0 0 3px #6933ff2e;
+  --background: 0 0% 100%;
+  --foreground: 240 5.9% 10%;
+  --card: 0 0% 100%;
+  --secondary: 240 4% 95.1%;
+  --border: 240 5.9% 90%;
+  --muted-foreground: 240 3.8% 46.1%;
+  --radius: 0.5rem;
+  --primary: var(--foreground);
+  --primary-fg: var(--background);
+  --color-bg: var(--mica-surface);
+  --color-bg-subtle: var(--mica-surface-subtle);
+  --color-text: var(--mica-text);
+  --color-text-muted: var(--mica-text-muted);
+  --color-text-secondary: var(--mica-text-secondary);
+  --color-border: var(--mica-border);
+  --mica-tint-violet: #efe7fd;
+  --mica-tint-violet-fg: #6a33d6;
+  --mica-tint-teal: #dcf6fb;
+  --mica-tint-teal-fg: #13627f;
+  --mica-tint-lime: #ecf5d9;
+  --mica-tint-lime-fg: #4a6a12;
+  --mica-tint-amber: #fff1d6;
+  --mica-tint-amber-fg: #8a5a00;
+  --mica-tint-rose: #fde6ec;
+  --mica-tint-rose-fg: #a3264a;
+  --mica-tint-slate: #ebebf0;
+  --mica-tint-slate-fg: #3a3a44;
+}
+
+.dark {
+  color-scheme: dark;
+  --mica-canvas: #0c0c0e;
+  --mica-surface: #101012;
+  --mica-surface-subtle: #131315;
+  --mica-surface-raised: #161618;
+  --mica-secondary: #242427;
+  --mica-sidebar: #0e0e10;
+  --mica-border: #27272a;
+  --mica-border-strong: #3f3f46;
+  --mica-text: #f4f4f5;
+  --mica-text-muted: #a1a1aa;
+  --mica-text-faint: #71717a;
+  --mica-text-secondary: var(--mica-text-muted);
+  --mica-primary: #f4f4f5;
+  --mica-on-primary: #18181b;
+  --mica-spectrum-start: #8b72ff;
+  --mica-spectrum-end: #00fced;
+  --mica-success: #63c495;
+  --mica-success-bg: #27845b24;
+  --mica-warning: #e0ad5b;
+  --mica-warning-bg: #a36a1224;
+  --mica-danger: #ef8181;
+  --mica-danger-bg: #c43d3d24;
+  --mica-info: #83aef0;
+  --mica-info-bg: #3568b824;
+  --mica-shadow-sm: 0 1px 2px #0000004d;
+  --mica-shadow-overlay: 0 16px 42px #0000005c;
+  --mica-focus-ring: 0 0 0 3px #8b72ff38;
+  --background: 240 5.9% 6.7%;
+  --foreground: 240 4.8% 95.9%;
+  --card: 240 4.3% 9%;
+  --secondary: 240 4% 14.7%;
+  --border: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+}
+
+[data-mica-theme='legacy-light'],
+[data-mica-theme='legacy-dark'] {
+  --mica-spectrum-start: #2563eb;
+  --mica-spectrum-end: #60a5fa;
+  --mica-focus-ring: 0 0 0 3px #2563eb33;
+}
+
+[data-mica-theme^='crl-'] {
+  --mica-font: 'Geist', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --mica-font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --mica-radius-md: 6px;
+  --mica-radius-lg: 8px;
+  --mica-radius-agent: 8px;
+}
+
+[data-mica-theme='crl-light'] {
+  color-scheme: light;
+  --mica-canvas: #f7f7f9;
+  --mica-surface: #fff;
+  --mica-surface-subtle: #fafafb;
+  --mica-surface-raised: #fff;
+  --mica-secondary: #efeff2;
+  --mica-sidebar: #f3f3f6;
+  --mica-border: #e3e3e8;
+  --mica-border-strong: #cfcfd6;
+  --mica-text: #17171c;
+  --mica-text-muted: #62626b;
+  --mica-text-faint: #6b6b75;
+  --mica-text-secondary: #4a4a52;
+  --mica-primary: #7a3fe4;
+  --mica-on-primary: #fff;
+  --mica-spectrum-start: #502482;
+  --mica-spectrum-end: #9059ff;
+  --mica-info: #144f6b;
+  --mica-info-bg: #dffbff;
+  --mica-accent: #6a33d6;
+  --mica-accent-soft: #efe7fd;
+  --mica-accent-soft-text: #5b25c4;
+  --mica-link: #6a33d6;
+  --mica-selection-bg: #e6dbff;
+  --mica-selection-text: #17171c;
+  --mica-app-bg: #f7f7f9;
+  --mica-header-bg: #fff;
+  --mica-tabs-bg: #fff;
+  --mica-nav-active-bg: #efe7fd;
+  --mica-nav-active-text: #6a33d6;
+  --mica-headline-accent: #5a7d1b;
+  --mica-label: #6b55a8;
+  --mica-send-idle-bg: #efe7fd;
+  --mica-send-idle-text: #8a63e0;
+  --mica-rail: #7a3fe4;
+  --mica-shadow-sm: 0 1px 2px #17171c0a;
+  --mica-shadow-overlay: 0 18px 48px #17171c1a;
+  --mica-focus-ring: 0 0 0 3px #7a3fe433;
+  --background: 0 0% 100%;
+  --foreground: 240 9.8% 10%;
+  --card: 0 0% 100%;
+  --secondary: 240 10.3% 94.3%;
+  --border: 240 9.8% 90%;
+  --muted-foreground: 240 4.4% 40.2%;
+  --primary: 261 75.3% 57.1%;
+  --primary-fg: 0 0% 100%;
+}
+
+[data-mica-theme='crl-dark'] {
+  color-scheme: dark;
+  --mica-canvas: #121214;
+  --mica-surface: #18181b;
+  --mica-surface-subtle: #1c1c20;
+  --mica-surface-raised: #1e1e22;
+  --mica-secondary: #232327;
+  --mica-sidebar: #111113;
+  --mica-border: #2b2b31;
+  --mica-border-strong: #3c3c44;
+  --mica-text: #ededf0;
+  --mica-text-muted: #a1a1aa;
+  --mica-text-faint: #8b8b94;
+  --mica-text-secondary: var(--mica-text-muted);
+  --mica-primary: #854cf7;
+  --mica-on-primary: #fff;
+  --mica-spectrum-start: #9059ff;
+  --mica-spectrum-end: #60ecff;
+  --mica-info: #7fd6ea;
+  --mica-info-bg: #144f6b42;
+  --mica-accent: #c2a5ff;
+  --mica-accent-soft: #9059ff29;
+  --mica-accent-soft-text: #d4c0ff;
+  --mica-link: #b793ff;
+  --mica-selection-bg: #9059ff66;
+  --mica-selection-text: #ededf0;
+  --mica-app-bg: #131315;
+  --mica-header-bg: #111113;
+  --mica-tabs-bg: #111113;
+  --mica-nav-active-bg: #9059ff24;
+  --mica-nav-active-text: #d4c0ff;
+  --mica-headline-accent: #c6e48a;
+  --mica-label: #c2a5ff;
+  --mica-send-idle-bg: #9059ff33;
+  --mica-send-idle-text: #c2a5ff;
+  --mica-rail: #9059ff;
+  --mica-shadow-sm: 0 1px 2px #00000057;
+  --mica-shadow-overlay: 0 18px 48px #00000080;
+  --mica-focus-ring: 0 0 0 3px #9059ff4d;
+  --background: 240 5.9% 10%;
+  --foreground: 240 9.1% 93.5%;
+  --card: 240 6.2% 12.5%;
+  --secondary: 240 5.4% 14.5%;
+  --border: 240 6.4% 18%;
+  --muted-foreground: 240 5% 64.9%;
+  --primary: 260 91.4% 63.3%;
+  --primary-fg: 0 0% 100%;
+}
+
+[data-mica-theme='crl-forest'] {
+  color-scheme: dark;
+  --mica-canvas: #0b110d;
+  --mica-surface: #101913;
+  --mica-surface-subtle: #141e17;
+  --mica-surface-raised: #18231b;
+  --mica-secondary: #1f2b22;
+  --mica-sidebar: #0d1410;
+  --mica-border: #23312a;
+  --mica-border-strong: #35473c;
+  --mica-text: #f7f6ef;
+  --mica-text-muted: #a8ad9f;
+  --mica-text-faint: #7a8177;
+  --mica-text-secondary: var(--mica-text-muted);
+  --mica-primary: #aede54;
+  --mica-on-primary: #101913;
+  --mica-spectrum-start: #9059ff;
+  --mica-spectrum-end: #60ecff;
+  --mica-info: #7fd6ea;
+  --mica-info-bg: #144f6b42;
+  --mica-accent: #60ecff;
+  --mica-accent-soft: #60ecff24;
+  --mica-accent-soft-text: #aff6ff;
+  --mica-link: #60ecff;
+  --mica-selection-bg: #9059ff6b;
+  --mica-selection-text: #f7f6ef;
+  --mica-app-bg: #0f1712;
+  --mica-header-bg: #0d1410;
+  --mica-tabs-bg: #0d1410;
+  --mica-nav-active-bg: #60ecff1f;
+  --mica-nav-active-text: #aff6ff;
+  --mica-headline-accent: #aede54;
+  --mica-label: #7fd6ea;
+  --mica-send-idle-bg: #aede5424;
+  --mica-send-idle-text: #aede54;
+  --mica-rail: #aede54;
+  --mica-shadow-sm: 0 1px 2px #00000057;
+  --mica-shadow-overlay: 0 18px 48px #00000075;
+  --mica-focus-ring: 0 0 0 3px #aede5442;
+  --background: 140 22% 8%;
+  --foreground: 53 33% 95%;
+  --card: 136 19% 12%;
+  --secondary: 135 16% 15%;
+  --border: 150 17% 16%;
+  --muted-foreground: 81 8% 65%;
+  --primary: 81 68% 60%;
+  --primary-fg: 140 22% 8%;
+}
+
+[data-mica-theme='terminal'] {
+  color-scheme: dark;
+  --mica-canvas: #000;
+  --mica-surface: #060a06;
+  --mica-surface-subtle: #081008;
+  --mica-surface-raised: #0b160b;
+  --mica-secondary: #102a14;
+  --mica-sidebar: #030603;
+  --mica-border: #14421f;
+  --mica-border-strong: #1d6b30;
+  --mica-text: #3bff6e;
+  --mica-text-muted: #2fbe57;
+  --mica-text-faint: #1f7f3c;
+  --mica-text-secondary: #35d964;
+  --mica-primary: #00ff41;
+  --mica-on-primary: #000;
+  --mica-spectrum-start: #00a838;
+  --mica-spectrum-end: #7dff9b;
+  --mica-success: #3bff6e;
+  --mica-success-bg: #00ff411f;
+  --mica-warning: #ffb642;
+  --mica-warning-bg: #ffb64224;
+  --mica-danger: #ff5f56;
+  --mica-danger-bg: #ff5f5624;
+  --mica-info: #5cffb0;
+  --mica-info-bg: #5cffb01f;
+  --mica-accent: #00ff41;
+  --mica-accent-soft: #00ff4124;
+  --mica-accent-soft-text: #8dffab;
+  --mica-link: #00ff41;
+  --mica-selection-bg: #00ff4152;
+  --mica-selection-text: #eaffef;
+  --mica-shadow-sm: 0 0 0 1px #00ff4114;
+  --mica-shadow-overlay: 0 0 28px #00ff4124, 0 18px 48px #000000b3;
+  --mica-focus-ring: 0 0 0 3px #00ff4152;
+  --background: 120 25% 3%;
+  --foreground: 136 100% 62%;
+  --card: 120 33% 7%;
+  --secondary: 129 45% 11%;
+  --border: 134 53% 17%;
+  --muted-foreground: 137 60% 46%;
+  --primary: 135 100% 50%;
+  --primary-fg: 0 0% 0%;
+  --mica-font: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --mica-font-mono: var(--mica-font);
+  --mica-radius-sm: 2px;
+  --mica-radius-md: 2px;
+  --mica-radius-lg: 2px;
+  --mica-radius-agent: 2px;
+}
+
+[data-mica-theme^='crl-'] ::selection,
+[data-mica-theme='terminal'] ::selection {
+  background: var(--mica-selection-bg);
+  color: var(--mica-selection-text);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+html {
+  font-family: var(--mica-font);
+}
+
+body {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  background: var(--mica-canvas);
+  color: var(--mica-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  color: var(--mica-text);
+  font-weight: 400;
+}
+
+a {
+  color: var(--mica-link);
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--mica-font);
+}

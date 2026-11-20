@@ -1,0 +1,42 @@
+.trigger {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 12px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: none;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.trigger:hover:not(:disabled) {
+  background: hsl(var(--secondary));
+}
+
+.trigger:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* The entry panel sits below the header, across the page. */
+.panel {
+  position: absolute;
+  top: 56px;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: var(--mica-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.field {
+  max-width: 360px;
+}

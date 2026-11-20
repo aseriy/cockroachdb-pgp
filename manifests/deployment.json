@@ -1,0 +1,48 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "name": "cockroachdb-pgp-demo",
+    "namespace": "default"
+  },
+  "spec": {
+    "replicas": 0,
+    "selector": {
+      "matchLabels": {
+        "app": "cockroachdb-pgp-demo"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "cockroachdb-pgp-demo"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "cockroachdb-pgp-demo",
+            "image": "localhost:5000/cockroachdb-pgp-demo:latest",
+            "imagePullPolicy": "Always",
+            "ports": [
+              {
+                "containerPort": 8080
+              }
+            ],
+            "env": [
+              {
+                "name": "SUPABASE_ANON_KEY",
+                "valueFrom": {
+                  "secretKeyRef": {
+                    "name": "supabase-jwt",
+                    "key": "anon-key"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
