@@ -15,8 +15,8 @@ BUCKET = "yahoo-news"
 CONNECTION_CHECK_SECONDS = 30
 CONNECTION_FAILED_CHECKS = 3
 RESTART_SECONDS = 5
-BACKFILL_ROWS = 1
-BACKFILL_SECONDS = 60 * 5
+BACKFILL_ROWS = 100
+BACKFILL_SECONDS = 60 * 15
 PROCESS_ATTEMPTS = 3
 
 
@@ -42,7 +42,7 @@ async def _cutoff(client: AsyncClient) -> str:
 
 
 async def _rows(client: AsyncClient, cutoff: str) -> list[dict]:
-    return (await client.table("yahoo_news").select("id, publication, pgp_messages()").eq("extracted", True).is_("pgp_messages", "null").lte("crdb_internal_mvcc_timestamp", cutoff).limit(BACKFILL_ROWS).execute()).data
+    return (await client.table("yahoo_news_unencrypted").select("id, publication").lte("mvcc_timestamp", cutoff).limit(BACKFILL_ROWS).execute()).data
 
 
 async def _download(client: AsyncClient, id: str) -> str:
@@ -53,11 +53,12 @@ async def _insert_pgp_messages(client: AsyncClient, id: str, published_on: str, 
     await client.table("pgp_messages").insert({"id": id, "published_on": published_on, "title": title, "content": content}).execute()
 
 
-async def _process(client: AsyncClient, lock: asyncio.Lock, passphrase: str, row: dict) -> bool:
+async def _process(client: AsyncClient, lock: asyncio.Lock, passphrase: str, row: dict, source: str) -> bool:
     async with lock:
         try:
             id = row["id"]
             publication = row["publication"]
+            logger.info(f"{id}: {source}")
             text = await _download(client, id)
             logger.info(f"{id}: downloaded {len(text)} characters")
             text, front_matter_size = _strip_front_matter(text)
@@ -73,6 +74,8 @@ async def _process(client: AsyncClient, lock: asyncio.Lock, passphrase: str, row
 
 
 async def _backfill(client: AsyncClient, lock: asyncio.Lock, passphrase: str) -> None:
+    logger.info(f"{CHANNEL}: backfill started")
+
     try:
         cutoff = await _cutoff(client)
     except Exception as error:
@@ -81,19 +84,21 @@ async def _backfill(client: AsyncClient, lock: asyncio.Lock, passphrase: str) ->
 
     while True:
         try:
-            rows = await _rows(client, cutoff)
+            async with lock:
+                rows = await _rows(client, cutoff)
         except Exception as error:
             logger.error(f"yahoo_news: {error}")
             return
 
         if not rows:
+            logger.info(f"{CHANNEL}: backfill finished")
             return
 
         logger.info(f"publications: {len(rows)}")
 
         for row in rows:
             for attempt in range(PROCESS_ATTEMPTS):
-                if await _process(client, lock, passphrase, row):
+                if await _process(client, lock, passphrase, row, "backfill"):
                     break
                 await asyncio.sleep(attempt + 1)
 
@@ -113,7 +118,7 @@ async def _serve(client: AsyncClient, passphrase: str) -> None:
         record = payload["data"]["record"]
         if record.get("extracted"):
             logger.info(f"{record.get('id')}: extracted")
-            asyncio.create_task(_process(client, lock, passphrase, record))
+            asyncio.create_task(_process(client, lock, passphrase, record, "update"))
 
     def on_status(status: RealtimeSubscribeStates, error) -> None:
         nonlocal backfill_task
