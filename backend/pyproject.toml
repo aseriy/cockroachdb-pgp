@@ -1,0 +1,21 @@
+[project]
+name = "pgp"
+version = "0.1.0"
+description = "Encrypts extracted Yahoo news articles into the pgp_messages table"
+requires-python = ">=3.12.3,<4.0"
+dependencies = [
+    "click==8.5.0",
+    "supabase==2.33.0",
+    "PGPy==0.6.0",
+    "standard-imghdr==3.13.0",
+]
+
+[tool.poetry]
+packages = [{ include = "pgp", from = "src" }]
+
+[tool.poetry.scripts]
+pgp_encrypt = "pgp.cli:encrypt"
+
+[build-system]
+requires = ["poetry-core>=1.9.0"]
+build-backend = "poetry.core.masonry.api"
